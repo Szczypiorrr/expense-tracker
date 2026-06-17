@@ -37,3 +37,12 @@ def get_expense(expense_id):
     session.close()
 
     return expense
+
+def get_all_expenses():
+    session = Session()
+
+    expenses = session.query(Expense).all()
+
+    session.close()
+
+    return expenses
