@@ -46,3 +46,15 @@ def get_all_expenses():
     session.close()
 
     return expenses
+
+def get_expenses_by_category(category_id):
+    session = Session()
+
+    expenses = session.query(Expense).where(Expense.category_id == category_id).all()
+
+    if not expenses:
+        return None
+    
+    session.close()
+
+    return expenses
