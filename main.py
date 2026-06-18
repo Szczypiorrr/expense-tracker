@@ -124,13 +124,7 @@ def generate_menu():
         message_and_return("\nMonthly summary report generated succesfully!")
 
     if option == 7:
-        try:
-            user_id = int(input("Enter user ID: "))
-        except ValueError:
-            message_and_return("Invalid type of data, must be a number.")
-        except:
-            message_and_return("An unexpected error occured.")
-
+        name = input("Enter username: ")
 
         date_str = input("Enter the report start date (format RRRR-MM-DD HH:MM): ")
 
@@ -139,7 +133,7 @@ def generate_menu():
         except:
             message_and_return("Invalid format, must be RRRR-MM-DD HH:MM.")
 
-        generate_report(user_id, date)
+        generate_report(name, date)
 
 
 if __name__ == "__main__":
