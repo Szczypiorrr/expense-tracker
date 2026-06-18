@@ -1,9 +1,10 @@
 import time
-from services.user_service import create_user, get_all_users
-from services.category_service import create_category, get_all_categories
+from services.user_service import create_user
+from services.category_service import create_category
 from datetime import datetime
-from services.expense_service import create_expense, get_all_expenses
+from services.expense_service import create_expense, get_all_expenses, get_expenses_by_category
 from database.init_db import init_database
+from services.report_service import show_monthly_summary, generate_report
 
 def message_and_return(message):
     print(message)
@@ -89,10 +90,56 @@ def generate_menu():
         print("All expenses:")
         i = 1
         for expense in expenses:
-            print(f"{i}. Amount: {expense.amount} | Description: {expense.description} | Date: {expense.date} | User ID: {expense.user_id} | Category ID: {expense.category_id}\n")
+            print(f"{i}. Expense ID: {expense.id} | Amount: {expense.amount} | Description: {expense.description} | Date: {expense.date} | User ID: {expense.user_id} | Category ID: {expense.category_id}\n")
             i += 1
 
         message_and_return("Expenses loaded succesfully!")
+
+    if option == 5:
+        try:
+            category_id = int(input("Enter category ID: "))
+        except ValueError:
+            message_and_return("Invalid type of data, must be a number.")
+        except:
+            message_and_return("An unexpected error occured.")
+
+        expenses = get_expenses_by_category(category_id)
+
+        if not expense:
+            message_and_return("No matches found.")
+
+        message_and_return("Expenses by category loaded succesfully!")
+
+    if option == 6:
+        try:
+            month = int(input("Enter the number of month: "))
+            year = int(input("Enter the number of year: "))
+        except ValueError:
+            message_and_return("Invalid type of data, must be a number.")
+        except:
+            message_and_return("An unexpected error occured.")
+
+        show_monthly_summary(month, year)
+
+        message_and_return("\nMonthly summary report generated succesfully!")
+
+    if option == 7:
+        try:
+            user_id = int(input("Enter user ID: "))
+        except ValueError:
+            message_and_return("Invalid type of data, must be a number.")
+        except:
+            message_and_return("An unexpected error occured.")
+
+
+        date_str = input("Enter the report start date (format RRRR-MM-DD HH:MM): ")
+
+        try:
+            date = datetime.strptime(date_str, "%Y-%m-%d %H:%M")
+        except:
+            message_and_return("Invalid format, must be RRRR-MM-DD HH:MM.")
+
+        generate_report(user_id, date)
 
 
 if __name__ == "__main__":
