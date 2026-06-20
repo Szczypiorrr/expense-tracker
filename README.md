@@ -120,7 +120,7 @@ To: 2026-01-20 14:30
 SUMMARY:
 Total expenses: 1200 PLN
 Number of expenses: 15
-Avarage expense: 80 PLN
+Average expense: 80 PLN
 
 HIGHEST EXPENSE:
 Rent - 3000 PLN (Housing)
