@@ -96,10 +96,11 @@ def generate_report(username, date):
             f.write(f"{name} - {round(total, 2)} PLN\n")
 
         f.write("\nTOP 5 EXPENSES:\n")
-        id = 1
+        i = 1
         for expense in expenses:
-            f.write(f"{id}. {expense.description} - {expense.amount} PLN\n")
-            id += 1
+            if i <= 5:
+                f.write(f"{i}. {expense.description} - {expense.amount} PLN\n")
+                i += 1
         
         session.close()
 
