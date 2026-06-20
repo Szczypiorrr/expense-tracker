@@ -22,9 +22,9 @@ def show_monthly_summary(month, year):
 
     print(f"Number of expenses: {len(expenses)}\n")
 
-    avarge_expense = session.query(func.avg(Expense.amount)).scalar()
+    avg_expense = session.query(func.avg(Expense.amount)).scalar()
 
-    print(f"Avarge expense amount: {round(avarge_expense, 2)} PLN\n")
+    print(f"Average expense amount: {round(avg_expense, 2)} PLN\n")
 
     most_expensive = session.query(Expense).order_by(Expense.amount).first()
 
@@ -69,7 +69,7 @@ def generate_report(username, date):
 
         avg_expenses = session.query(func.avg(Expense.amount)).where(and_(Expense.user_id == user.id, Expense.date >= date, Expense.date <= now)).scalar()
 
-        f.write(f"Avarge expense: {round(avg_expenses, 2)} PLN\n\n")
+        f.write(f"Average expense: {round(avg_expenses, 2)} PLN\n\n")
 
         highest_expense = session.query(Expense).where(Expense.user_id == user.id).order_by(Expense.amount.desc()).first()
 
