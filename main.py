@@ -1,19 +1,27 @@
 import time
 from services.user_service import create_user, get_user
 from services.category_service import create_category, get_category
-from datetime import datetime
 from services.expense_service import create_expense, get_all_expenses, get_expenses_by_category
 from database.init_db import init_database
 from services.report_service import show_monthly_summary, generate_report
 from helpers.validator import validate_menu_option, validate_username, validate_amount, validate_description, validate_category_name, validate_date
 
 def message_and_return(message):
+    """
+    Simple helper function to show message and return to main menu after delay.
+    """
+
     print(message)
     time.sleep(4)
     generate_menu()
     return 
 
 def generate_menu():
+    """
+    Main CLI menu for Expense Tracker application.
+    Handles user input and routes to proper functionality.
+    """
+
     print("====== WELCOME TO EXPENSE TRACKER ======")
     print("1. Create user")
     print("2. Add category")
@@ -31,6 +39,7 @@ def generate_menu():
     except:
         message_and_return("An unexpected error occured.")
 
+    # ---------------- USER CREATION ----------------
     if option == 1:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -44,6 +53,7 @@ def generate_menu():
 
         message_and_return("User created succesfully!")
 
+    # ---------------- CATEGORY CREATION ----------------
     elif option == 2:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -57,6 +67,7 @@ def generate_menu():
 
         message_and_return("User created succesfully!")
 
+    # ---------------- ADD EXPENSE ----------------
     elif option == 3:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -106,6 +117,7 @@ def generate_menu():
 
         message_and_return("\nExpense created succesfully!")
 
+    # ---------------- SHOW ALL EXPENSES ----------------
     elif option == 4:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -120,6 +132,7 @@ def generate_menu():
 
         message_and_return("\nExpenses loaded succesfully!")
 
+    # ---------------- FILTER BY CATEGORY ----------------
     elif option == 5:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -138,6 +151,7 @@ def generate_menu():
 
         message_and_return("\nExpenses by category loaded succesfully!")
 
+    # ---------------- MONTHLY SUMMARY ----------------
     elif option == 6:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -154,6 +168,7 @@ def generate_menu():
 
         message_and_return("\nMonthly summary report generated succesfully!")
 
+    # ---------------- REPORT GENERATION ----------------
     elif option == 7:
         if not validate_menu_option(option):
             message_and_return("Option must be a number between 1-8")
@@ -176,6 +191,7 @@ def generate_menu():
 
         message_and_return("\nReport generated succesfully!")
 
+    # ---------------- EXIT ----------------
     elif option == 8:
         print("Thank you for using our app, hope you enjoyed it!")
         time.sleep(4)

@@ -7,6 +7,16 @@ from services.user_service import get_user
 from datetime import datetime
 
 def show_monthly_summary(month, year):
+    """
+    Prints monthly expense summary for all users.
+
+    Shows:
+    - total expenses
+    - average expense
+    - most expensive expense
+    - expenses grouped by category
+    """
+
     session = Session()
     print("Monthly Summary\n")
 
@@ -43,6 +53,20 @@ def show_monthly_summary(month, year):
 
 
 def generate_report(username, date):
+    """
+    Generates detailed expense report for a specific user and time range.
+
+    Saves report to:
+    reports/report.txt
+
+    Includes:
+    - user info
+    - time range
+    - total / avg / min / max expenses
+    - category breakdown
+    - top expenses list
+    """
+
     with open("reports/report.txt", "w") as f:
         session = Session()
         f.write("================= EXPENSE REPORT =================\n")

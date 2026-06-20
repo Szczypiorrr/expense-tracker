@@ -2,6 +2,10 @@ from database.db import Session
 from models.category import Category
 
 def create_category(name):
+    """
+    Creates new category and saves it to database.
+    """
+
     session = Session()
 
     category = Category(name = name)
@@ -14,6 +18,11 @@ def create_category(name):
     return category
 
 def get_category(name):
+    """
+    Returns category by name.
+    If category does not exist, returns None.
+    """
+
     session = Session()
 
     category = session.query(Category).where(name == name).first()

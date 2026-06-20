@@ -2,6 +2,10 @@ from database.db import Session
 from models.expense import Expense
 
 def create_expense(amount, description, date, user_id, category_id):
+    """
+    Creates a new expense and saves it to database.
+    """
+    
     session = Session()
 
     expense = Expense(amount = amount, description = description, date = date, user_id = user_id, category_id = category_id)
@@ -14,6 +18,10 @@ def create_expense(amount, description, date, user_id, category_id):
     return expense
 
 def get_all_expenses():
+    """
+    Returns all expenses from database.
+    """
+
     session = Session()
 
     expenses = session.query(Expense).all()
@@ -23,6 +31,11 @@ def get_all_expenses():
     return expenses
 
 def get_expenses_by_category(category_id):
+    """
+    Returns all expenses filtered by category_id.
+    Returns None if no expenses found.
+    """
+
     session = Session()
 
     expenses = session.query(Expense).where(Expense.category_id == category_id).all()
