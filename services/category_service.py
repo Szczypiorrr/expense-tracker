@@ -21,12 +21,3 @@ def get_category(name):
     session.close()
 
     return category
-
-def get_all_categories():
-    session = Session()
-
-    categories = session.query(Category).all()
-
-    session.close()
-
-    return categories
